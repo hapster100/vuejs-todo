@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 22px;
+  margin: 0;
+}
+
+.title {
+  font-size: 20px;
+  font-family: 'Righteous', 'Montserrat Alternates', sans-serif;
+  font-weight: bold;
+}
+
+.input ,.btn{
+  color: #22222a;
+  font-weight: bold;
+  font-family: 'Monsterrat', sans-serif !important;
+  border: 2px solid #22222a;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: white;
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    border-color: #cc2936 !important;
+    background-color: #cc2936 !important;
+    color: white !important;
+  }
+}
+
+::selection {
+  color: white;
+  background: #cc2936;
+}
