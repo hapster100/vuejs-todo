@@ -1,16 +1,21 @@
 <template>
   <div class="categories-list">
-    <router-link v-for="category in categories" :key="category.id"
-      class="categories-list__item item title"
-      tag="div"
-      :to="{name: 'r-category', params: {id: category.id}}"
-    >
-      <div class="title">
-        {{ category.title }}
-      </div>
-      <button class="btn categories-list__delete-btn"
-        @click.stop="deleteCategory(category.id)">delete</button>
-    </router-link>
+    <div v-if="categories.length > 0">
+      <router-link v-for="category in categories" :key="category.id"
+        class="categories-list__item item title"
+        tag="div"
+        :to="{name: 'r-category', params: {id: category.id}}"
+      >
+        <div class="title">
+          {{ category.title }}
+        </div>
+        <button class="btn categories-list__delete-btn"
+          @click.stop="deleteCategory(category.id)">delete</button>
+      </router-link>
+    </div>
+    <div v-else class="categories-list__empty-message">
+      No Categories
+    </div>
     <router-link
       class="categories-list__add-btn btn"
       :to="{name: 'r-create-category'}" tag="div"
@@ -39,6 +44,12 @@ export default {
   .categories-list {
     margin-top: 10px;
 
+    &__empty-message {
+      font-size: 30px;
+      margin: 25px auto;
+      text-align: center;
+    }
+
     &__item {
       cursor: pointer;
       font-size: 26px;
@@ -56,11 +67,13 @@ export default {
 
       .title {
         margin: 15px 20px;
+        font-size: 28px;
       }
     }
 
     &__add-btn {
       margin: 0 auto;
+      margin-top: 15px;
 
       display: flex;
       justify-content: center;

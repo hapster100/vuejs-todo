@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'Checkbox',
   props: {
     value: {
       required: true,
@@ -18,19 +19,28 @@ export default {
     size: {
       type: Number,
       default: 40
+    },
+    color: {
+      default: '#cc2936'
+    },
+    backColor: {
+      default: '#ffffff'
     }
   },
   computed: {
     outStyle() {
       return {
         width: this.size + 'px',
-        height: this.size + 'px'
+        height: this.size + 'px',
+        borderColor: this.color,
+        backColor: this.backColor
       }
     },
     inStyle() {
       return {
         width: Math.round(this.size * 3 / 4) + 'px',
-        height: Math.round(this.size * 3 / 4) + 'px'
+        height: Math.round(this.size * 3 / 4) + 'px',
+        backgroundColor: this.color
       }
     }
   },
@@ -44,9 +54,8 @@ export default {
 
 <style lang="scss" scoped>
   .checkbox {
-    margin: auto 0;
-    margin-right: 10px;
-    border: 2px solid #cc2936;
+    cursor: pointer;
+    border: 2px solid;
     border-radius: 50%;
 
     display: flex;
@@ -54,7 +63,6 @@ export default {
     justify-content: center;
 
     &__done {
-      background-color: #cc2936;
       border-radius: 50%;
     }
   }

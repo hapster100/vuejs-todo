@@ -2,6 +2,9 @@
   <div class="task">
     <div class="task__title title">
       {{ task.title }}
+      <button class="btn task__delete-btn"
+        @click.stop="deleteTask()">delete
+      </button>
     </div>
     <div class="task__info">
       <div class="task__info-field info-field">
@@ -11,14 +14,27 @@
         <span class="info-field__label">Category:</span> {{ category }}
       </div>
       <div class="task__info-field  info-field">
-        <span class="info-field__label">Status:</span> {{ task.done ? 'Done' : 'Not Done' }}
+        <span class="info-field__label">Status:</span>
+        {{ task.done ? 'Done' : 'Not Done' }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Checkbox from './Checkbox'
 export default {
+  components: { Checkbox },
+  methods: {
+    deleteTask() {
+      const { categoryId } = this.task
+      this.$store.dispatch('deleteTask', this.task.id)
+      this.$router.push({name: 'r-category', params: {id: categoryId}})
+    },
+    toggleTask() {
+      this.$store.dispatch('toggleDone', this.task)
+    }
+  },
   computed: {
     task() {
       const id = this.$route.params.id
@@ -44,8 +60,11 @@ export default {
       font-size: 40px;
       color: white;
       background-color: #cc2936;
-      padding: 15px 0;
+      padding: 15px 20px;
       padding-left: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     &__info {
@@ -54,6 +73,12 @@ export default {
 
     &__info-field {
       margin-bottom: 5px;
+    }
+
+    &__delete-btn {
+      &:hover {
+        border-color: white !important;
+      }
     }
   }
 
