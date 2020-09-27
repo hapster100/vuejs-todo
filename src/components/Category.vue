@@ -1,5 +1,7 @@
 <template>
   <div class="tasks-list">
+    <div class="tasks-list__title title">{{ category.title }}</div>
+    <div class="tasks-list__counter title">Done: {{ doneTaskCount }}/{{ tasks.length }}</div>
     <router-link v-for="task in tasks" :key="task.id"
       class="tasks-list__item item title"
       tag="div"
@@ -8,34 +10,56 @@
       <div class="title">
         {{ task.title }}
       </div>
+      <checkbox :value="task.done" @toggle="toggleTask(task)" />
     </router-link>
     <router-link
       class="tasks-list__add-btn btn"
-      :to="{name: 'r-create-task', params: {categoryId: this.$route.params.id}}" tag="div"
+      :to="{name: 'r-create-task', params: {categoryId: category.id}}" tag="div"
     >+</router-link>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Checkbox from './Checkbox'
 export default {
   name: 'Categories',
+  components: { Checkbox },
   computed: {
     ...mapGetters([
       'categoryTasks'
     ]),
     tasks() {
-      return this.categoryTasks(this.$route.params.id)
+      return this.categoryTasks(this.category.id)
+    },
+    category() {
+      return this.$store.getters.category(this.$route.params.id)
+    },
+    doneTaskCount() {
+      return this.tasks.filter(t => t.done).length
     }
   },
   methods: {
+    toggleTask(task) {
+      this.$store.dispatch('toggleDone', task)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .tasks-list {
-    margin-top: 10px;
+
+    &__title {
+      text-align: center;
+      text-transform: capitalize;
+      font-size: 40px;
+      margin: 10px;
+    }
+
+    &__counter {
+      text-align: right;
+    }
 
     &__item {
       cursor: pointer;
