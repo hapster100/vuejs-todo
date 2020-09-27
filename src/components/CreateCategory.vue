@@ -1,19 +1,16 @@
 <template>
   <div class="create-category">
     <div class="create-category__title title">Add Category</div>
-    <div class="create-category__form">
-      <div class="input-label">Title:</div>
-      <div class="input-wrapper">
-        <input v-model="title" class="input" />
-      </div>
-    </div>
+    <full-input class="create-category__input" :value="title" :label="'Title:'" @change="title = $event" />
     <button @click="addBtnClick()" class="create-category__add-btn btn">Add Category</button>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import FullInput from './FullInput'
 export default {
+  components: {FullInput},
   data() {
     return {
       title: ''
@@ -48,20 +45,8 @@ export default {
       padding-left: 20px;
     }
 
-    &__form {
+    &__input {
       padding: 15px;
-      display: flex;
-      align-items: center;
-
-      .input-label {
-        margin-right: 10px;
-      }
-      .input-wrapper {
-        flex-grow: 1;
-      }
-      .input {
-        width: 100%;
-      }
     }
 
     &__add-btn {

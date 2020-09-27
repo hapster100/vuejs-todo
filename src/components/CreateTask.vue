@@ -1,25 +1,17 @@
 <template>
   <div class="create-task">
     <div class="create-task__title title">Add Task</div>
-    <div class="create-task__form">
-      <div class="input-label">Title:</div>
-      <div class="input-wrapper">
-        <input v-model="title" class="input" />
-      </div>
-    </div>
-    <div class="create-task__form">
-      <div class="input-label">Description:</div>
-      <div class="input-wrapper">
-        <textarea v-model="description" class="input" />
-      </div>
-    </div>
+    <full-input class="create-task__input" :value="title" @change="title = $event" :label="'Title:'" />
+    <full-input class="create-task__input" :value="description" @change="description = $event" :label="'Description:'" :area="true" />
     <button @click="addBtnClick()" class="create-task__add-btn btn">Add Task</button>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import FullInput from './FullInput'
 export default {
+  components: { FullInput },
   data() {
     return {
       title: '',
@@ -62,24 +54,8 @@ export default {
       padding-left: 20px;
     }
 
-    &__form {
+    &__input {
       padding: 15px;
-      display: flex;
-      align-items: flex-start;
-
-      .input-label {
-        margin-right: 10px;
-        margin-top: 5px;
-        width: 150px;
-      }
-      .input-wrapper {
-        flex-grow: 1;
-      }
-      .input {
-        min-height: 38px;
-        resize: vertical;
-        width: 100%;
-      }
     }
 
     &__add-btn {
