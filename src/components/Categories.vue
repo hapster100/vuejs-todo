@@ -61,8 +61,7 @@ export default {
       display: flex;
       justify-content: space-between;
       &:hover {
-        scale: 1.01;
-        z-index: 2;
+        background-color: #f5f5f5;
       }
 
       .title {
@@ -72,8 +71,7 @@ export default {
     }
 
     &__add-btn {
-      margin: 0 auto;
-      margin-top: 15px;
+      margin: 15px auto;
 
       display: flex;
       justify-content: center;
@@ -89,6 +87,7 @@ export default {
 
     &__delete-btn {
       margin: 10px;
+      background-color: rgba(0,0,0,0);
     }
   }
 

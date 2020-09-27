@@ -39,6 +39,9 @@ body, html {
     background-color: #cc2936 !important;
     color: white !important;
   }
+  &:focus {
+    outline: 1px solid #cc2936;
+  }
 }
 
 ::selection {

@@ -84,9 +84,9 @@ export default {
       justify-content: space-between;
       align-items: center;
       padding-right: 10px;
+      height: 60px;
       &:hover {
-        scale: 1.01;
-        z-index: 2;
+        background-color: #efefef;
       }
 
       .title {
@@ -95,8 +95,7 @@ export default {
     }
 
     &__add-btn {
-      margin: 0 auto;
-      margin-top: 15px;
+      margin: 15px auto;
 
       display: flex;
       justify-content: center;
