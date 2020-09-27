@@ -11,7 +11,7 @@ const saveCategory = title => {
   storage.saveItem([...ids, {id, title}], CATEGORY_ARR_KEY)
 }
 
-const loadCategories = _ => storage.loadItem(CATEGORY_ARR_KEY)
+const loadCategories = _ => storage.loadItem(CATEGORY_ARR_KEY) || []
 
 const deleteCategory = categoryId => {
   const ids = storage.loadItem(CATEGORY_ARR_KEY) || []
