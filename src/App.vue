@@ -35,11 +35,13 @@ export default {
   .scroll-enter {
     opacity: 0;
     transform: translate(100vw);
+    scale: 0;
   }
 
   .scroll-leave-to {
     opacity: 0;
     transform: translate(-100vw);
+    scale: 0;
   }
 
 </style>

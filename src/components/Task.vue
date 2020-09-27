@@ -1,30 +1,35 @@
 <template>
-  <div class="task">
-    <div class="task__title title">
-      {{ task.title }}
-      <button class="btn task__delete-btn"
+  <bordered-content class="task">
+    <template v-slot:header-left>
+      <div class="task__title title">
+        {{ task.title }}
+      </div>
+    </template>
+    <template v-slot:header-right>
+      <button class="btn delete-btn"
         @click.stop="deleteTask()">delete
       </button>
-    </div>
-    <div class="task__info">
-      <div class="task__info-field info-field">
+    </template>
+    <template v-slot:content>
+      <div class="info-field info-field">
         <span class="info-field__label">Description:</span> {{ task.description || 'No Description' }}
       </div>
-      <div class="task__info-field info-field">
+      <div class="info-field info-field">
         <span class="info-field__label">Category:</span> {{ category }}
       </div>
-      <div class="task__info-field  info-field">
+      <div class="info-field  info-field">
         <span class="info-field__label">Status:</span>
         {{ task.done ? 'Done' : 'Not Done' }}
       </div>
-    </div>
-  </div>
+    </template>
+  </bordered-content>
 </template>
 
 <script>
 import Checkbox from './Checkbox'
+import BorderedContent from './BorderedContent'
 export default {
-  components: { Checkbox },
+  components: { Checkbox, BorderedContent },
   methods: {
     deleteTask() {
       const { categoryId } = this.task
@@ -50,38 +55,18 @@ export default {
 <style lang="scss" scoped>
   .task {
     margin-top: 10px;
-    border: 2px solid #cc2936;
-    border-radius: 5px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-
     &__title {
       font-size: 40px;
-      color: white;
-      background-color: #cc2936;
-      padding: 15px 20px;
-      padding-left: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    &__info {
-      padding: 15px;
-    }
-
-    &__info-field {
-      margin-bottom: 5px;
-    }
-
-    &__delete-btn {
-      &:hover {
-        border-color: white !important;
-      }
     }
   }
-
+  .info-field {
+    margin-bottom: 5px;
+  }
+  .delete-btn {
+    &:hover {
+      border-color: white !important;
+    }
+  }
   .info-field {
     &__label {
       display: inline-block;

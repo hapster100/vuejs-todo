@@ -1,16 +1,23 @@
 <template>
-  <div class="create-category">
-    <div class="create-category__title title">Add Category</div>
-    <full-input class="create-category__input" :value="title" :label="'Title:'" @change="title = $event" />
-    <button @click="addBtnClick()" class="create-category__add-btn btn">Add Category</button>
+  <div>
+    <bordered-content class="create-category">
+      <template v-slot:header-left>
+        <div class="create-category__title title">Add Category</div>
+      </template>
+      <template v-slot:content>
+        <full-input :value="title" :label="'Title:'" @change="title = $event" />
+        <button @click="addBtnClick()" class="add-btn btn">Add Category</button>
+      </template>
+    </bordered-content>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import FullInput from './FullInput'
+import BorderedContent from './BorderedContent'
 export default {
-  components: {FullInput},
+  components: { FullInput, BorderedContent },
   data() {
     return {
       title: ''
@@ -31,28 +38,14 @@ export default {
 <style lang="scss" scoped>
   .create-category {
     margin-top: 10px;
-    border: 2px solid #cc2936;
-    border-radius: 5px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-
     &__title {
       font-size: 40px;
-      color: white;
-      background-color: #cc2936;
-      padding: 15px 0;
-      padding-left: 20px;
     }
+  }
 
-    &__input {
-      padding: 15px;
-    }
-
-    &__add-btn {
-      font-weight: bold;
-      width: max-content;
-      margin: 0 15px 15px auto;
-    }
+  .add-btn {
+    font-weight: bold;
+    width: max-content;
+    margin: 15px 0 0 auto;
   }
 </style>
