@@ -1,6 +1,6 @@
 <template>
   <div class="create-category">
-    <div class="create-category__title title">Create Category</div>
+    <div class="create-category__title title">Add Category</div>
     <div class="create-category__form">
       <div class="input-label">Title:</div>
       <div class="input-wrapper">

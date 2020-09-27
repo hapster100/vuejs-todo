@@ -1,6 +1,6 @@
 <template>
   <div class="create-task">
-    <div class="create-task__title title">Create Task</div>
+    <div class="create-task__title title">Add Task</div>
     <div class="create-task__form">
       <div class="input-label">Title:</div>
       <div class="input-wrapper">
