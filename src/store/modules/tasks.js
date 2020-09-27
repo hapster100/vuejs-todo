@@ -19,11 +19,26 @@ const actions = {
   addTask(store, task) {
     taskStorage.saveTask(task)
     store.commit('SET_TASKS', taskStorage.loadTasks())
+  },
+  deleteTask(store, taskId) {
+    taskStorage.deleteTask(taskId)
+    store.commit('SET_TASKS', taskStorage.loadTasks())
+  },
+  editTask(store, task) {
+    taskStorage.editTask(task)
+    store.commit('SET_TASKS', taskStorage.loadTasks())
+  },
+  toggleDone(store, task) {
+    taskStorage.editTask({...task, done: !task.done})
+    store.commit('SET_TASKS', taskStorage.loadTasks())
   }
 }
 const getters = {
   categoryTasks(state) {
     return categoryId => state.tasks.filter(t => t.categoryId === categoryId)
+  },
+  task() {
+    return id => state.tasks.find(t => t.id === id)
   }
 }
 
