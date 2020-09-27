@@ -2,7 +2,9 @@
   <div id="app">
     <todo-header></todo-header>
     <main  class="container">
-      <router-view/>
+      <transition name="scroll" mode="out-in">
+        <router-view/>
+      </transition>
     </main>
   </div>
 </template>
@@ -25,4 +27,19 @@ export default {
     max-width: 1000px;
     margin: 0 auto;
   }
+
+  .scroll-enter-active, .scroll-leave-active {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .scroll-enter {
+    opacity: 0;
+    transform: translate(100vw);
+  }
+
+  .scroll-leave-to {
+    opacity: 0;
+    transform: translate(-100vw);
+  }
+
 </style>
