@@ -6,6 +6,9 @@ const state = {
 const mutations = {
   SET_CATEGORIES(state, categories) {
     state.categories = categories
+  },
+  ADD_CATEGORY(state, category) {
+    state.categories.push(category)
   }
 }
 const actions = {
@@ -13,16 +16,15 @@ const actions = {
     commit('SET_CATEGORIES', categoriesStorage.loadCategories())
   },
   addCategory(store, title) {
-    categoriesStorage.saveCategory(title)
-
-    const newCategories = categoriesStorage.loadCategories()
-
-    store.commit('SET_CATEGORIES', newCategories)
+    const category = categoriesStorage.saveCategory(title)
+    store.commit('ADD_CATEGORY', category)
   },
   deleteCategory(store, categoryId) {
     store.dispatch('deleteCategoryTasks', categoryId)
     categoriesStorage.deleteCategory(categoryId)
-    store.commit('SET_CATEGORIES', categoriesStorage.loadCategories())
+
+    const newCategories = store.state.categories.filter(c => c.id !== categoryId)
+    store.commit('SET_CATEGORIES', newCategories)
   }
 }
 const getters = {

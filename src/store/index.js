@@ -6,9 +6,14 @@ import categories from './modules/categories'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     tasks,
     categories
   }
 })
+
+store.dispatch('initTasks')
+store.dispatch('initCategories')
+
+export default store

@@ -9,14 +9,14 @@ const taskkey = id => `${TASK_BASE_KEY}${id}`
 
 const saveTask = task => {
   const id = uniqid.time()
-  const key = taskkey(id)
+  const taskToSave = { ...task, id }
 
+  const key = taskkey(id)
   const ids = storage.loadItem(TASK_ARR_KEY) || []
   storage.saveItem([...ids, id], TASK_ARR_KEY)
+  storage.saveItem(taskToSave, key)
 
-  storage.saveItem({
-    ...task, id
-  }, key)
+  return taskToSave
 }
 
 const loadTasks = _ => {

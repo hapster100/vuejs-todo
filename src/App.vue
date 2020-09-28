@@ -14,11 +14,7 @@ import TodoHeader from './components/Header'
 
 export default {
   name: 'App',
-  components: { TodoHeader },
-  created() {
-    this.$store.dispatch('initCategories')
-    this.$store.dispatch('initTasks')
-  }
+  components: { TodoHeader }
 }
 </script>
 

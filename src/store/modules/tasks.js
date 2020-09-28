@@ -6,6 +6,12 @@ const state = {
 const mutations = {
   SET_TASKS(state, tasks) {
     state.tasks = tasks
+  },
+  ADD_TASK(state, task) {
+    state.tasks.push(task)
+  },
+  DELETE_TASK(state, taskId) {
+    state.tasks = state.tasks.filter(task => task.id !== taskId)
   }
 }
 const actions = {
@@ -14,23 +20,30 @@ const actions = {
   },
   deleteCategoryTasks(store, categoryId) {
     store.getters.categoryTasks(categoryId).forEach(task => taskStorage.deleteTask(task.id))
-    store.commit('SET_TASKS', taskStorage.loadTasks())
+
+    const newTasks = store.state.tasks.filter(task => task.categoryId !== categoryId)
+    store.commit('SET_TASKS', newTasks)
   },
   addTask(store, task) {
-    taskStorage.saveTask(task)
-    store.commit('SET_TASKS', taskStorage.loadTasks())
+    const newTask = taskStorage.saveTask(task)
+    store.commit('ADD_TASK', newTask)
   },
   deleteTask(store, taskId) {
     taskStorage.deleteTask(taskId)
-    store.commit('SET_TASKS', taskStorage.loadTasks())
+    store.commit('DELETE_TASK', taskId)
   },
   editTask(store, task) {
     taskStorage.editTask(task)
-    store.commit('SET_TASKS', taskStorage.loadTasks())
+
+    const newTasks = store.state.tasks.map(t => t.id === task.id ? task : t)
+    store.commit('SET_TASKS', newTasks)
   },
   toggleDone(store, task) {
-    taskStorage.editTask({...task, done: !task.done})
-    store.commit('SET_TASKS', taskStorage.loadTasks())
+    const toggledTasks = {...task, done: !task.done}
+    taskStorage.editTask(toggledTasks)
+
+    const newTasks = store.state.tasks.map(t => t.id === task.id ? toggledTasks : t)
+    store.commit('SET_TASKS', newTasks)
   }
 }
 const getters = {
