@@ -10,7 +10,9 @@
           {{ category.title }}
         </div>
         <button class="btn categories-list__delete-btn"
-          @click.stop="deleteCategory(category.id)">delete</button>
+          @click.stop="deleteCategory(category.id)">
+          <icon icon="delete" :size="20" />
+        </button>
       </router-link>
     </div>
     <div v-else class="categories-list__empty-message">
@@ -25,8 +27,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Icon from './Icon'
 export default {
   name: 'Categories',
+  components: { Icon },
   computed: {
     ...mapGetters([
       'categories'
