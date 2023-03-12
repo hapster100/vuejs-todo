@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.task">
     <router-link tag="div" class="back-to" :to="{name: 'r-category', params: { id: this.task.categoryId }}">
       <icon class="back-to__icon" :icon="'keyboard_arrow_left'" :size="50"/>
       <span class="back-to__title" >{{ categoryTitle }}</span>
@@ -55,6 +55,11 @@ export default {
     },
     categoryTitle() {
       return this.$store.getters.category(this.task.categoryId).title
+    }
+  },
+  created() {
+    if (this.task === undefined) {
+      this.$router.push({name: 'r-categories'})
     }
   }
 }

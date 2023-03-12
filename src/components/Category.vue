@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks-list">
+  <div class="tasks-list" v-if="this.category">
     <div class="tasks-list__title title">{{ category.title }}</div>
     <div v-if="tasks.length > 0">
       <div class="tasks-list__counter title">Done: {{ doneTaskCount }}/{{ tasks.length }}</div>
@@ -47,6 +47,11 @@ export default {
   methods: {
     toggleTask(task) {
       this.$store.dispatch('toggleDone', task)
+    }
+  },
+  created() {
+    if (this.category === undefined) {
+      this.$router.push({name: 'r-categories'})
     }
   }
 }
