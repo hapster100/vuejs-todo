@@ -34,7 +34,7 @@ export default {
 <style lang="scss" scoped>
   .full-input {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
 
     &__label {
         margin-right: 10px;
@@ -59,6 +59,13 @@ export default {
       &:focus {
         outline: none;
       }
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .full-input {
+      align-items: flex-start;
+      flex-direction: row;
     }
   }
 </style>
